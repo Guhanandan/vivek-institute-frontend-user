@@ -21,11 +21,11 @@ function App() {
   return (
     <UserProvider>
       <Router>
-        <div className="min-h-screen flex flex-col">
-          <Navbar />
-          <div className="flex-1 flex">
-            <Sidebar />
-            <main className="flex-1 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="min-h-screen flex">
+          <Sidebar />
+          <div className="flex-1 flex flex-col">
+            <Navbar />
+            <main className="flex-1 p-6">
               <Routes>
                 <Route path="/" element={
                   <div className="space-y-12">
@@ -56,12 +56,12 @@ function App() {
                 <Route path="*" element={<Navigate to="/" replace />} />
               </Routes>
             </main>
+            <Footer />
           </div>
-          <Footer />
         </div>
       </Router>
     </UserProvider>
   );
 }
 
-export default App;
+export default App
