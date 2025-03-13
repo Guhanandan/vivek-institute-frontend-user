@@ -155,7 +155,7 @@ const LoginForm: React.FC = () => {
               >
                 <img
                   className="h-5 w-5 mr-2"
-                  src="https://www.svgrepo.com/show/448234/microsoft.svg"
+                  src="https://www.svgrepo.com/show/475656/google-color.svg"
                   alt="Microsoft logo"
                 />
                 <span>Log in with Microsoft</span>

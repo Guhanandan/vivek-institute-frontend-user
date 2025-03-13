@@ -1,134 +1,83 @@
-import React, { useState } from 'react';
-import { useParams, useNavigate, useLocation } from 'react-router-dom';
-import { CreditCard, Calendar, Lock } from 'lucide-react';
-import { Course } from '../../types';
+import React from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import { CheckCircle, ArrowRight } from 'lucide-react';
 import { JEE_COURSES, NEET_COURSES } from '../Layout/Sidebar/constants';
 
 const PaymentPage: React.FC = () => {
   const { courseId } = useParams();
   const navigate = useNavigate();
-  const location = useLocation();
   const allCourses = [...JEE_COURSES, ...NEET_COURSES];
   const course = allCourses.find(c => c.id === courseId);
-
-  const [formData, setFormData] = useState({
-    cardNumber: '',
-    cardName: '',
-    expiryDate: '',
-    cvv: '',
-  });
 
   if (!course) {
     return <div>Course not found</div>;
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+  const handlePayment = () => {
     // Here you would typically handle the payment processing
-    // For now, we'll just show a success message and redirect
     alert('Payment successful! You are now enrolled in the course.');
     navigate('/courses');
   };
+
+  const benefits = [
+    'Instant access to course materials',
+    'Live interactive sessions',
+    'Doubt clearing sessions',
+    'Practice tests and assessments',
+    'Performance tracking',
+    'Access to recorded lectures'
+  ];
 
   return (
     <div className="min-h-screen bg-gray-50 py-12">
       <div className="max-w-3xl mx-auto px-4">
         <div className="bg-white rounded-xl shadow-lg overflow-hidden">
-          <div className="bg-primary p-6 text-white">
+          <div className="bg-primary p-8 text-white">
             <h2 className="text-2xl font-bold">Complete Your Enrollment</h2>
             <p className="mt-2 opacity-90">Course: {course.name}</p>
           </div>
 
-          <div className="p-6">
+          <div className="p-8">
+            {/* Course Benefits */}
             <div className="mb-8">
-              <h3 className="text-lg font-semibold mb-2">Order Summary</h3>
-              <div className="bg-gray-50 p-4 rounded-lg">
-                <div className="flex justify-between mb-2">
+              <h3 className="text-lg font-semibold mb-4">What you'll get</h3>
+              <div className="grid gap-3">
+                {benefits.map((benefit, index) => (
+                  <div key={index} className="flex items-center gap-2 text-gray-600">
+                    <CheckCircle className="w-5 h-5 text-primary" />
+                    <span>{benefit}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Order Summary */}
+            <div className="bg-gray-50 p-6 rounded-xl mb-8">
+              <h3 className="text-lg font-semibold mb-4">Order Summary</h3>
+              <div className="space-y-3">
+                <div className="flex justify-between">
                   <span>Course Fee</span>
                   <span>₹{course.fees.toLocaleString()}</span>
                 </div>
-                <div className="flex justify-between font-semibold text-lg border-t pt-2 mt-2">
-                  <span>Total</span>
+                <div className="flex justify-between font-semibold text-lg pt-3 border-t">
+                  <span>Total Amount</span>
                   <span>₹{course.fees.toLocaleString()}</span>
                 </div>
               </div>
             </div>
 
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Card Number
-                </label>
-                <div className="relative">
-                  <input
-                    type="text"
-                    maxLength={16}
-                    required
-                    className="form-input pl-10"
-                    placeholder="1234 5678 9012 3456"
-                    value={formData.cardNumber}
-                    onChange={(e) => setFormData({ ...formData, cardNumber: e.target.value })}
-                  />
-                  <CreditCard className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
-                </div>
-              </div>
+            {/* Payment Button */}
+            <button
+              onClick={handlePayment}
+              className="w-full flex items-center justify-center gap-2 bg-primary text-white py-4 px-6 rounded-xl font-semibold hover:bg-primary-dark transition-colors"
+            >
+              <span>Pay ₹{course.fees.toLocaleString()}</span>
+              <ArrowRight className="w-5 h-5" />
+            </button>
 
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Cardholder Name
-                </label>
-                <input
-                  type="text"
-                  required
-                  className="form-input"
-                  placeholder="John Doe"
-                  value={formData.cardName}
-                  onChange={(e) => setFormData({ ...formData, cardName: e.target.value })}
-                />
-              </div>
-
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Expiry Date
-                  </label>
-                  <div className="relative">
-                    <input
-                      type="text"
-                      required
-                      className="form-input pl-10"
-                      placeholder="MM/YY"
-                      maxLength={5}
-                      value={formData.expiryDate}
-                      onChange={(e) => setFormData({ ...formData, expiryDate: e.target.value })}
-                    />
-                    <Calendar className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
-                  </div>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    CVV
-                  </label>
-                  <div className="relative">
-                    <input
-                      type="password"
-                      required
-                      className="form-input pl-10"
-                      placeholder="123"
-                      maxLength={3}
-                      value={formData.cvv}
-                      onChange={(e) => setFormData({ ...formData, cvv: e.target.value })}
-                    />
-                    <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
-                  </div>
-                </div>
-              </div>
-
-              <button type="submit" className="w-full btn btn-primary py-3">
-                Pay ₹{course.fees.toLocaleString()}
-              </button>
-            </form>
+            <p className="text-center text-sm text-gray-500 mt-4">
+              By proceeding with the payment, you agree to our terms and conditions
+            </p>
           </div>
         </div>
       </div>

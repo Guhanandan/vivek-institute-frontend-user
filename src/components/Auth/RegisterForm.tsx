@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { User } from '../../types';
+import {Link} from "react-router-dom"
 
 const RegisterForm: React.FC = () => {
   const navigate = useNavigate();
@@ -28,9 +29,9 @@ const RegisterForm: React.FC = () => {
         </h2>
         <p className="mt-2 text-center text-sm text-gray-600">
           Already have an account?{' '}
-          <a href="/login" className="font-medium text-primary hover:text-primary-dark">
+          <Link to="/login" className="font-medium text-primary hover:text-primary-dark">
             Sign in
-          </a>
+          </Link>
         </p>
       </div>
 
