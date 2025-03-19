@@ -9,12 +9,15 @@ import CourseDetail from './components/Courses/CourseDetail';
 import LoginForm from './components/Auth/LoginForm';
 import RegisterForm from './components/Auth/RegisterForm';
 import PaymentPage from './components/Payment/PaymentPage';
+import PaymentsPage from './components/Payment/PaymentsPage';
 import SearchBar from './components/Home/SearchBar';
 import Testimonials from './components/Home/Testimonials';
 import WhyChooseUs from './components/Home/WhyChooseUs';
 import SchedulePage from './components/Schedule/SchedulePage';
 import AboutPage from './components/About/AboutPage';
 import ProfilePage from './components/Profile/ProfilePage';
+import FacultyPage from './components/Faculty/FacultyPage';
+import ResourcesPage from './components/Resources/ResourcesPage';
 import { GraduationCap, Users, Clock, Video, BookOpen, Trophy } from 'lucide-react';
 import './index.css';
 
@@ -156,9 +159,12 @@ function App() {
                 <Route path="/courses" element={<CourseGrid />} />
                 <Route path="/course/:courseId" element={<CourseDetail />} />
                 <Route path="/payment/:courseId" element={<PaymentPage />} />
+                <Route path="/payments" element={<PaymentsPage />} />
                 <Route path="/schedule" element={<SchedulePage />} />
                 <Route path="/about" element={<AboutPage />} />
                 <Route path="/profile" element={<ProfilePage />} />
+                <Route path="/faculty" element={<FacultyPage />} />
+                <Route path="/resources" element={<ResourcesPage />} />
                 <Route path="*" element={<Navigate to="/" replace />} />
               </Routes>
             </main>
