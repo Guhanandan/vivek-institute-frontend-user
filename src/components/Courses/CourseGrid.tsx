@@ -14,7 +14,8 @@ const CourseGrid: React.FC = () => {
         setLoading(true);
         setError(null);
         const response = await courseAPI.getAllCourses();
-        setCourses(response.data);
+        // Access the courses array from the response.data.data structure
+        setCourses(response.data.data);
       } catch (err: any) {
         let errorMessage = 'Failed to fetch courses. Please try again later.';
         if (err.response) {
