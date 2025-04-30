@@ -5,17 +5,42 @@ export interface User {
   role: 'admin' | 'student';
 }
 
-export interface Course {
-  id: string;
-  name: string;
+export interface Resource {
+  _id: string;
+  title: string;
+  type: 'VIDEO' | 'PDF' | 'QUIZ';
+  url: string;
+}
+
+export interface SyllabusWeek {
+  _id: string;
+  week: number;
+  topic: string;
   description: string;
-  duration: string;
-  fees: number;
-  schedule: {
-    startTime: string;
-    endTime: string;
-    days: string[];
-  };
+  resources: Resource[];
+}
+
+export interface Course {
+  _id: string;
+  name: string;
+  courseCode: string;
+  description: string;
+  faculty: string;
+  thumbnail: string | null;
+  duration: number;
+  startDate: string;
+  endDate: string;
+  maxStudents: number;
+  courseFee: number;
+  teachingDays: string[];
+  startTime: string;
+  endTime: string;
+  isActive: boolean;
+  syllabus: SyllabusWeek[];
+  tags: string[];
+  createdAt: string;
+  updatedAt: string;
+  meetSessions: any[];
 }
 
 export interface Enrollment {
