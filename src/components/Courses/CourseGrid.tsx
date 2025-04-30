@@ -15,8 +15,16 @@ const CourseGrid: React.FC = () => {
         setError(null);
         const response = await courseAPI.getAllCourses();
         setCourses(response.data);
-      } catch (err) {
-        setError('Failed to fetch courses. Please try again later.');
+      } catch (err: any) {
+        let errorMessage = 'Failed to fetch courses. Please try again later.';
+        if (err.response) {
+          // Server responded with an error
+          errorMessage = `Server error: ${err.response.status} - ${err.response.data.message || 'Unknown error'}`;
+        } else if (err.request) {
+          // Request was made but no response
+          errorMessage = 'Unable to reach the server. Please check your connection and try again.';
+        }
+        setError(errorMessage);
         console.error('Error fetching courses:', err);
       } finally {
         setLoading(false);
@@ -53,10 +61,10 @@ const CourseGrid: React.FC = () => {
   return (
     <section className="py-12">
       <div className="max-w-7xl mx-auto">
-        <h2 className="text-3xl font-bold text-gray-900 mb-8">Our Courses</h2>
+        <h2 className="text-3xl font-bold text-gray-900 mb-8">Available Courses</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {courses.map((course) => (
-            <CourseCard key={course.id} course={course} />
+            <CourseCard key={course._id} course={course} />
           ))}
         </div>
       </div>

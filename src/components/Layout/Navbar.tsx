@@ -1,5 +1,5 @@
 import React from 'react';
-import { GraduationCap, User as UserIcon, LogOut } from 'lucide-react';
+import { User as UserIcon, LogOut } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useUser } from '../../contexts/UserContext';
 
@@ -15,9 +15,13 @@ const Navbar: React.FC = () => {
   return (
     <nav className="navbar">
       <div className="nav-content">
-        <Link to="/" className="nav-logo">
-          <GraduationCap size={28} />
-          <span>Vivek Institute</span>
+        <Link to="/" className="flex items-center gap-2">
+          <img 
+            src="/logo.png" 
+            alt="Vivek Institute Logo" 
+            className="h-12 w-auto object-contain"
+          />
+          <span className="text-xl font-semibold text-primary">Vivek Institute</span>
         </Link>
         <ul className="nav-links">
           <li><Link to="/courses">Courses</Link></li>

@@ -34,8 +34,9 @@ function App() {
                 <Route path="/" element={
                   <div className="space-y-12">
                     {/* Hero Section */}
-                    <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-primary to-primary-dark">
-                      <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1200&auto=format&fit=crop&q=60')] opacity-10 bg-cover bg-center" />
+                    <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-primary/80 to-primary-dark/80">
+                      <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1200&auto=format&fit=crop&q=60')] bg-cover bg-center" />
+                      <div className="absolute inset-0 bg-primary/30" />
                       <div className="relative max-w-4xl mx-auto text-center py-24 px-4 sm:py-32 sm:px-6 lg:px-8">
                         <h1 className="text-4xl font-extrabold text-white sm:text-5xl sm:tracking-tight lg:text-6xl">
                           Welcome to Vivek Institute
